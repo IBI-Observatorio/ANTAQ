@@ -432,7 +432,207 @@ def a30_portgdp():
         "achados": achados,
     }
     resultado.update(extras)
+    resultado.update(_construir_blocos_editoriais())
     return resultado
+
+
+def _construir_blocos_editoriais() -> dict:
+    """Blocos editoriais estáticos para a página do indicador #30 (pirâmide invertida)."""
+    return {
+        "o_que_e": {
+            "o_que_e": (
+                "Modelo do Observatório IBI que prevê a produção industrial "
+                "brasileira (PIM-PF Indústria Geral, do IBGE) dois meses antes "
+                "do IBGE divulgar."
+            ),
+            "para_que_serve": (
+                "Antecipar movimentos da indústria — desacelerações, recuperações, "
+                "inflexões de ciclo — usando um sinal que aparece nos portos antes "
+                "de aparecer na produção. Quando a indústria importa mais insumos, "
+                "a produção tende a subir alguns meses depois; quando importa menos, "
+                "tende a cair. O modelo lê esse sinal nas movimentações portuárias "
+                "da ANTAQ."
+            ),
+            "quao_bom": (
+                "Em validação histórica de 95 meses (jan/2018 a out/2025), o erro "
+                "médio das previsões foi de cerca de 3 pontos percentuais na "
+                "variação interanual. Isso é suficiente para detectar direção e "
+                "timing de ciclo industrial, não para previsão de magnitude exata."
+            ),
+            "o_que_nao_faz": (
+                "Não prevê o PIB. Não é um indicador de atividade econômica geral. "
+                "Cobre apenas a indústria, que corresponde a cerca de 20% do PIB "
+                "brasileiro."
+            ),
+        },
+        "como_funciona": {
+            "introducao": "O modelo combina duas fontes de informação:",
+            "fontes": [
+                {
+                    "numero": 1,
+                    "titulo": "A própria história do PIM-PF",
+                    "descricao": (
+                        "A produção industrial tem inércia — o mês que vem tende "
+                        "a parecer com o mês que passou. Modelos estatísticos "
+                        "simples capturam essa inércia bem."
+                    ),
+                },
+                {
+                    "numero": 2,
+                    "titulo": "A movimentação dos portos",
+                    "descricao": (
+                        "O IBI extraiu, das estatísticas da ANTAQ, um sinal "
+                        "latente comum a 35 séries de movimentação portuária "
+                        "(os 10 maiores portos do Brasil, em quatro tipos de "
+                        "carga e dois sentidos). Esse sinal aparece nos portos "
+                        "antes de aparecer na produção industrial, com defasagem "
+                        "média de 2 meses."
+                    ),
+                },
+            ],
+            "pesos": (
+                "O peso de cada fonte na previsão final é recalculado a cada mês, "
+                "automaticamente, sem usar informação do futuro. Em média, o sinal "
+                "portuário entra com peso de 42% e a inércia do próprio PIM-PF "
+                "com peso de 58%."
+            ),
+        },
+        "por_que_bimestral": {
+            "texto": (
+                "Em horizonte de 1 mês, o sinal portuário não acrescentou valor "
+                "estatístico significativo frente à inércia do próprio PIM-PF. "
+                "O Observatório optou por não publicar previsão mensal — apenas "
+                "a bimestral, onde o ganho é demonstrável. Os artefatos da "
+                "análise descartada estão arquivados como compromisso de "
+                "transparência."
+            ),
+            "link_arquivado": "validacao/portgdp_v2/h1_arquivado/README.md",
+        },
+        "detalhes_tecnicos": {
+            "collapsed": True,
+            "label": "Detalhes técnicos da especificação e validação",
+            "especificacao": (
+                "Combinação convexa entre uma previsão AR(1) do PIM-PF Indústria "
+                "Geral (BCB SGS 28503) e uma previsão extraída de Dynamic Factor "
+                "Model de 1 fator com dinâmica AR(2), aplicado a 35 séries da "
+                "ANTAQ defasadas em 2 meses (top 10 portos × 4 naturezas × 2 "
+                "sentidos, FlagLongoCurso=1). Pesos estimados por "
+                "Granger-Ramanathan restrito (soma=1, OLS sem intercepto) em "
+                "rolling expansivo OOS, com aquecimento mínimo de 36 origens."
+            ),
+            "validacao": (
+                "Rolling-origin walk-forward com 95 origens (jan/2018 a out/2025), "
+                "horizonte fixo h=2. MAE da combinação: 3,01 pp em var12m, vs "
+                "3,02 pp do AR(1) puro e 3,49 pp do DFM-1f isolado. "
+                "Diebold-Mariano com correção HLN da combinação contra AR(1): "
+                "p=0,75 — não rejeita igualdade de erros pontuais."
+            ),
+            "encompassing_test": (
+                "Encompassing test simétrico (HLN 1998). Rejeita “AR(1) encompasses "
+                "DFM” (λ=0,49, p<0,001) e rejeita “DFM encompasses AR(1)” "
+                "(λ=0,51, p<0,001). O padrão simétrico indica que ambos os "
+                "componentes carregam informação preditiva não-redundante — base "
+                "estatística para a publicação como indicador combinado."
+            ),
+            "pesos_rolling": (
+                "Peso médio do componente DFM ao longo das 58 origens OOS-legítimas: "
+                "42,4% (mediana 43,2%, dp 2,8 pp, intervalo [27,3%, 48,5%], zero "
+                "truncamentos em [0,1])."
+            ),
+            "intervalos_previsao": (
+                "Split conformal padrão (Lei et al. 2018), cobertura nominal 80%, "
+                "calculado com correção ⌈(n+1)(1−α)⌉/n sobre 29 erros absolutos "
+                "do conjunto de calibração. Cobertura empírica em janela de teste "
+                "de 29 origens: 100%, IC95% Wilson [88,3%, 100%]. Bandas "
+                "conservadoras frente ao nível nominal — o método tende a errar "
+                "incluindo mais observações do que o promissor, não menos."
+            ),
+            "diagnosticos_residuo": (
+                "Ljung-Box rejeita ausência de autocorrelação em lag 12 (p=0,007); "
+                "Jarque-Bera rejeita normalidade (esperado em var12m com período "
+                "COVID); ARCH-LM não rejeita homocedasticidade. A autocorrelação "
+                "residual implica que (i) erros-padrão dos pesos GR rolling podem "
+                "estar subestimados e (ii) a premissa de exchangeability do split "
+                "conformal está parcialmente violada — a garantia formal degrada "
+                "em janela curta. Ambos os fatos reforçam a decisão de publicar "
+                "bandas conservadoras e re-avaliar no re-test de mai/2028."
+            ),
+            "criterio_publicacao": (
+                "Análise pré-registrada com regra de decisão fechada antes da "
+                "execução. O modelo passou no critério apenas em h=2; em h=1, "
+                "peso médio do DFM rolling foi 15,5% (no piso da banda) e "
+                "DM p=0,64 — falha no critério forte, e o produto não é publicado "
+                "nesse horizonte. Consultar h1_arquivado/README.md para detalhes."
+            ),
+        },
+        "limitacoes": {
+            "items": [
+                {
+                    "label": "Vintage",
+                    "texto": (
+                        "Validação realizada em série revisada do PIM-PF "
+                        "(BCB SGS 28503). Performance em previsão real, contra "
+                        "primeiro vintage publicado pelo IBGE, pode degradar "
+                        "10–25% conforme literatura padrão de nowcasting "
+                        "macroeconômico. Snapshots de cada release do PIM-PF "
+                        "e da ANTAQ são arquivados desde mai/2026 para análise "
+                        "comparativa de degradação por revisão, a ser publicada "
+                        "na re-validação de mai/2028."
+                    ),
+                },
+                {
+                    "label": "Escopo",
+                    "texto": (
+                        "O indicador prevê produção industrial física (PIM-PF "
+                        "Indústria Geral, ~20% do PIB), não PIB nem atividade "
+                        "econômica geral. Não substitui modelos de nowcasting de "
+                        "PIB como os do BCB (IBC-Br) ou de bancos privados."
+                    ),
+                },
+                {
+                    "label": "Horizonte",
+                    "texto": (
+                        "Publicado apenas em horizonte bimestral (h=2). Em "
+                        "horizonte mensal, o componente portuário não passou no "
+                        "critério de publicação."
+                    ),
+                },
+                {
+                    "label": "Re-validação",
+                    "texto": (
+                        "Bateria completa será re-rodada em mai/2028 com regra "
+                        "de decisão pré-registrada e publicação integral do "
+                        "resultado, incluindo possível descontinuação caso o "
+                        "sinal não persista."
+                    ),
+                },
+            ],
+        },
+        "reprodutibilidade": {
+            "links": [
+                {
+                    "emoji": "📄",
+                    "label": "Nota técnica completa",
+                    "href": "docs/nota_tecnica_pimpf_combinado_v1.md",
+                },
+                {
+                    "emoji": "🗂",
+                    "label": "Por que não publicamos em horizonte mensal",
+                    "href": "validacao/portgdp_v2/h1_arquivado/README.md",
+                },
+                {
+                    "emoji": "📅",
+                    "label": "Compromisso de re-validação 2028",
+                    "href": "validacao/portgdp_v2/compromisso_retest_2028.md",
+                },
+                {
+                    "emoji": "📊",
+                    "label": "Calendário de releases",
+                    "href": "docs/calendario_releases.md",
+                },
+            ],
+        },
+    }
 
 
 def _construir_extras_card_pim_pf() -> dict:
