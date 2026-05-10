@@ -1,0 +1,122 @@
+name: Atualizar indicadores ANTAQ no Observatório
+
+# Roda mensalmente (dia 5 às 06:00 UTC) — a ANTAQ publica novos dados
+# com defasagem de algumas semanas, então rodar todo dia 5 dá margem.
+on:
+  schedule:
+    - cron: "0 6 5 * *"
+  workflow_dispatch:
+    inputs:
+      apenas_indicadores:
+        description: "IDs separados por espaço (vazio = todos). Ex: 03 25 30"
+        required: false
+        default: ""
+
+env:
+  SITE_REPO: "IBI-Observatorio/IBI-Observatorio"
+  # subdiretório do app Vite dentro do repo do site
+  SITE_APP_PATH: "ibi-observatorio"
+  SITE_BRANCH: "main"
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # ── 1. Repositório de origem (ANTAQ) ─────────────────────────────────
+      - name: Checkout ANTAQ
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      # ── 2. Cache dos ZIPs e Parquets (poupa horas de download) ───────────
+      - name: Cache de ZIPs ANTAQ
+        uses: actions/cache@v4
+        with:
+          path: dados
+          key: antaq-dados-${{ github.run_id }}
+          restore-keys: |
+            antaq-dados-
+
+      - name: Cache de Parquets consolidados
+        uses: actions/cache@v4
+        with:
+          path: parquet
+          key: antaq-parquet-${{ github.run_id }}
+          restore-keys: |
+            antaq-parquet-
+
+      # ── 3. Forçar refresh do ano corrente ────────────────────────────────
+      # ANTAQ atualiza mês a mês; o último ano sempre tem dado novo.
+      - name: Limpar ZIPs e Parquets do ano corrente
+        run: |
+          ANO=$(date -u +%Y)
+          echo "Removendo dados/$ANO/ e parquet/*/$ANO.parquet"
+          rm -rf "dados/$ANO" || true
+          find parquet -name "$ANO.parquet" -delete || true
+
+      # ── 4. Pipeline ANTAQ → Parquet → JSONs ──────────────────────────────
+      - name: Baixar dados da ANTAQ
+        run: python download_antaq.py
+
+      - name: Consolidar em Parquet
+        run: python consolidar_antaq.py
+
+      - name: Gerar figuras (run_all)
+        run: python -m analises.run_all
+
+      - name: Publicar pacote (JSONs + manifest + PNGs)
+        run: |
+          if [ -n "${{ github.event.inputs.apenas_indicadores }}" ]; then
+            python -m analises.publicar --apenas ${{ github.event.inputs.apenas_indicadores }} --output ./_publicar
+          else
+            python -m analises.publicar --output ./_publicar
+          fi
+
+      - name: Upload artefato (sempre, mesmo se commit falhar)
+        uses: actions/upload-artifact@v4
+        with:
+          name: antaq-publicar-${{ github.run_id }}
+          path: _publicar/
+          retention-days: 30
+
+      # ── 5. Commit no repo do site ────────────────────────────────────────
+      - name: Checkout repo do Observatório
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.SITE_REPO }}
+          token: ${{ secrets.OBSERVATORIO_PAT }}
+          path: site
+          ref: ${{ env.SITE_BRANCH }}
+
+      - name: Sincronizar pacote no site
+        run: |
+          DESTINO="site/${{ env.SITE_APP_PATH }}/public/data/antaq"
+          mkdir -p "$DESTINO"
+          # remove apenas conteúdo gerenciado por este pipeline; preserva eventuais arquivos externos
+          rm -rf "$DESTINO/indicadores" "$DESTINO/figs" "$DESTINO/manifest.json"
+          cp -r _publicar/* "$DESTINO/"
+          ls -la "$DESTINO"
+
+      - name: Commit e push no Observatório
+        working-directory: site
+        run: |
+          git config user.name  "ibi-bot"
+          git config user.email "ibi-bot@users.noreply.github.com"
+          git add ${{ env.SITE_APP_PATH }}/public/data/antaq
+          if git diff --cached --quiet; then
+            echo "Nenhuma mudança nos indicadores — nada a commitar."
+            exit 0
+          fi
+          DATA=$(date -u +%Y-%m-%d)
+          git commit -m "chore(antaq): atualização automática $DATA"
+          git push origin ${{ env.SITE_BRANCH }}

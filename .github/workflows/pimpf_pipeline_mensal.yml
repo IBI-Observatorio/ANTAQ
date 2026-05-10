@@ -1,0 +1,144 @@
+name: PIM-PF Combinado IBI — pipeline mensal
+
+# Cron: dia 5 de cada mês, 08h UTC.
+# Justificativa: IBGE publica o PIM-PF do mês t-2 com defasagem ~40
+# dias. Dia 5 garante que o snapshot capture a publicação típica do
+# mês corrente.
+#
+# Permissões deliberadamente limitadas:
+#   - escreve em CSVs (snapshots, previsões, track record)
+#   - abre issues e PRs
+#   - NÃO modifica conteúdo editorial do site (metadata.py, c7_ineditas.py,
+#     componentes React, nota técnica, etc.)
+#
+# Em caso de sucesso: commita os CSVs novos em branch
+# `data-update/AAAA-MM` e abre PR auto-merge com label `auto-merge-data`.
+# Em caso de falha: abre issue com label `pipeline-falha` e logs anexados.
+
+on:
+  schedule:
+    - cron: "0 8 5 * *"
+  workflow_dispatch:
+    inputs:
+      pular_antaq:
+        description: "Não re-executar pipeline ANTAQ (debug)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Cache de Parquets ANTAQ
+        if: ${{ !inputs.pular_antaq }}
+        uses: actions/cache@v4
+        with:
+          path: parquet
+          key:  antaq-parquet-${{ github.run_id }}
+          restore-keys: |
+            antaq-parquet-
+
+      - name: Cache de ZIPs ANTAQ
+        if: ${{ !inputs.pular_antaq }}
+        uses: actions/cache@v4
+        with:
+          path: dados
+          key:  antaq-dados-${{ github.run_id }}
+          restore-keys: |
+            antaq-dados-
+
+      - name: Rodar orquestrador
+        id: run
+        env:
+          GH_REPO:      ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULAR_ANTAQ:  ${{ inputs.pular_antaq && '1' || '0' }}
+        run: |
+          set -e
+          bash pipelines/pimpf_combinado/orquestrador.sh
+
+      - name: Detectar mudanças em CSVs de dados
+        id: diff
+        run: |
+          git add data/ models/refit_log.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "mudou=false" >> "$GITHUB_OUTPUT"
+            echo "Nenhuma mudança nos CSVs — não cria PR."
+          else
+            echo "mudou=true"  >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Criar PR auto-merge com dados novos
+        if: steps.diff.outputs.mudou == 'true' && success()
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token:        ${{ secrets.GITHUB_TOKEN }}
+          branch:       data-update/${{ github.run_id }}
+          base:         main
+          title:        "chore(data): PIM-PF Combinado — atualização automática"
+          body: |
+            Atualização automática de previsão mensal do PIM-PF
+            Combinado IBI executada pelo cron mensal.
+
+            **Escopo:** apenas CSVs em `data/` e `models/refit_log.md`.
+            **Não toca:** `metadata.py`, `c7_ineditas.py`, componentes
+            React, nota técnica ou qualquer artefato editorial.
+
+            Auto-merge habilitado se sem objeções em 24h.
+          labels: |
+            auto-merge-data
+            pim-pf-combinado
+            pipeline-mensal
+          add-paths: |
+            data/
+            models/refit_log.md
+
+      - name: Abrir issue em caso de falha
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const titulo = `[Pipeline] Falha na execução mensal · ${new Date().toISOString().slice(0,10)}`;
+            const corpo = `
+            **Workflow:** ${context.workflow}
+            **Run ID:** ${context.runId}
+            **Trigger:** ${context.eventName}
+
+            Pipeline mensal PIM-PF Combinado IBI falhou. Verificar
+            logs em [run ${context.runId}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).
+
+            **Próximas ações:**
+            - [ ] Verificar logs da etapa que falhou
+            - [ ] Investigar se foi falha transiente (BCB API, ANTAQ)
+            - [ ] Re-rodar manualmente via workflow_dispatch quando estável
+            - [ ] Se falha persistente, investigar mudanças em fontes
+            `;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              title: titulo,
+              body:  corpo,
+              labels: ["pipeline-falha", "pim-pf-combinado", "auto-alerta"],
+            });

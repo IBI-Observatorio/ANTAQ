@@ -1,0 +1,5 @@
+teste,stat,p_value
+Ljung-Box (lag 12),27.175259,0.007290
+Ljung-Box (lag 24),27.604121,0.277091
+Jarque-Bera (normalidade),700.983072,0.000000
+ARCH-LM (lag 12),14.791828,0.253019

@@ -1,0 +1,3 @@
+h,modelo_alvo,baseline,dm_stat,p_value,n
+1,ardl_logdiff,ar1_logdiff,1.021326,0.309448,106
+2,ardl_logdiff,ar1_logdiff,0.833462,0.406494,105

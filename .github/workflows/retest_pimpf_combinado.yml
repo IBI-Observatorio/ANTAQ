@@ -1,0 +1,145 @@
+name: Lembrete de re-test — PIM-PF Combinado IBI
+
+# Cron de lembrete pré-registrado em
+# validacao/portgdp_v2/compromisso_retest_2028.md
+#
+# Comportamento DELIBERADAMENTE limitado:
+#   - Abre issue com checklist do re-test
+#   - Notifica a equipe via mention/assignee
+#   - Verifica se o re-test já foi feito (existência do arquivo)
+#   - NÃO modifica nada no site
+#   - NÃO rebaixa o indicador
+#   - NÃO toca em metadata.py, c7_ineditas.py, ou qualquer artefato
+#     de produção
+#
+# Rebaixamento ou promoção dependem de re-execução humana da bateria
+# completa, com PR explícito.
+
+on:
+  schedule:
+    # 1º de maio de 2028, 12:00 UTC (re-disparo: 15 mai e 1 jun)
+    - cron: "0 12 1 5 *"     # todo dia 1 de maio (anual). Em 2028 dispara
+                              # naturalmente na data alvo do compromisso.
+  workflow_dispatch:
+    inputs:
+      forcar_alerta:
+        description: "Forçar criação da issue mesmo fora de mai/2028"
+        type: boolean
+        default: false
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  alertar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Validar gatilho temporal (apenas em 2028+)
+        id: gate
+        run: |
+          ANO=$(date -u +%Y)
+          FORCAR="${{ github.event.inputs.forcar_alerta || 'false' }}"
+          if [ "$ANO" -ge 2028 ] || [ "$FORCAR" = "true" ]; then
+            echo "disparar=true"  >> "$GITHUB_OUTPUT"
+            echo "Ano $ANO ≥ 2028 ou disparo manual: prosseguindo."
+          else
+            echo "disparar=false" >> "$GITHUB_OUTPUT"
+            echo "Ano $ANO < 2028: lembrete só dispara a partir de 2028."
+            echo "Para teste manual, use workflow_dispatch com forcar_alerta=true."
+          fi
+
+      - name: Verificar se re-test já foi entregue
+        id: check_retest
+        if: steps.gate.outputs.disparar == 'true'
+        run: |
+          ARQ="validacao/portgdp_v2/retest_2028/sumario_executivo.md"
+          if [ -f "$ARQ" ]; then
+            echo "ja_feito=true"  >> "$GITHUB_OUTPUT"
+            echo "Re-test detectado em $ARQ — apenas registrar status."
+          else
+            echo "ja_feito=false" >> "$GITHUB_OUTPUT"
+            echo "Re-test pendente — criar issue com checklist."
+          fi
+
+      - name: Criar issue com checklist do re-test
+        if: steps.gate.outputs.disparar == 'true' && steps.check_retest.outputs.ja_feito == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const titulo = "Re-test PIM-PF Combinado IBI — devido em mai/2028";
+            const body = `
+            **Disparado por:** lembrete automático pré-registrado em
+            \`validacao/portgdp_v2/compromisso_retest_2028.md\`.
+
+            > Este alerta é **apenas notificação humana**. O cron NÃO
+            > rebaixa o indicador, NÃO modifica metadata.py, NÃO altera
+            > o site. Toda decisão de status (manter Linha D, promover
+            > para A/B/C, ou rebaixar para E) depende de re-execução
+            > humana da bateria sobre dados novos.
+
+            ## Checklist do re-test
+
+            ### Setup (Dia 0–1)
+            - [ ] Confirmar que séries ANTAQ até dez/2027 estão atualizadas em \`parquet/\`
+            - [ ] Atualizar PIM-PF (BCB SGS 28503) até dez/2027
+            - [ ] Re-rodar \`python -m analises.validacao.portgdp_v2_dicionario\`
+                  e confirmar dicionário (35 séries esperadas, possivelmente
+                  ajustado pelo top 10 de 2014–2026 conforme pré-registro)
+            - [ ] Re-rodar \`python -m analises.validacao.portgdp_v2_preparacao\`
+                  (STL + var12m)
+
+            ### Estimação (Dia 2–3)
+            - [ ] DFM full-sample (\`portgdp_v2_dfm_fullsample.py\`) — sanity de loadings
+            - [ ] Walk-forward (\`portgdp_v2_walkforward.py\`) — refit por origem,
+                  janela ~ 80 origens (vs 58 em 2026)
+
+            ### Validação (Dia 4)
+            - [ ] DM-HLN com baselines RW, AR(1), sazonal naive, ARDL
+            - [ ] Encompassing test bidireccional DFM ↔ AR(1)
+            - [ ] Granger-Ramanathan rolling OOS — pesos por origem
+            - [ ] Calibração conformal — n_calib + n_teste expandidos
+
+            ### Decisão (Dia 5)
+            Aplicar mecanicamente a regra completa de
+            \`compromisso_retest_2028.md\` (sem zonas mortas):
+            - [ ] **Linha A/B**: DM rejeita (p<0,05) e w_DFM ≥ 25%
+            - [ ] **Linha D mantida**: w_DFM ≥ 25%, MAE_comb < MAE_AR1, DM 0,05 ≤ p < 0,20
+            - [ ] **Recalibração conformal**: cobertura desviar > 10pp da nominal
+            - [ ] **Linha E**: w_DFM < 15% OU MAE_comb ≥ MAE_AR1 OU DM p ≥ 0,20
+
+            ### Publicação (independente do veredito)
+            - [ ] Salvar outputs em \`validacao/portgdp_v2/retest_2028/\`
+                  (espelhando estrutura de 2026)
+            - [ ] Atualizar \`metadata.py\` indicador #30 com nova categoria/badge
+            - [ ] Atualizar \`a30_portgdp\` em \`c7_ineditas.py\`
+            - [ ] Atualizar \`docs/nota_tecnica_pimpf_combinado_v1.md\` →
+                  \`v2.md\` com diff em relação à v1
+            - [ ] Post no observatório explicando a mudança (mesmo se
+                  for rebaixamento — compromisso público de transparência)
+
+            ## Referências
+            - [Compromisso original](../blob/main/validacao/portgdp_v2/compromisso_retest_2028.md)
+            - [Pré-registro do lançamento](../blob/main/validacao/portgdp_v2/REGRA_LANCAMENTO.md)
+            - [Nota técnica v1](../blob/main/docs/nota_tecnica_pimpf_combinado_v1.md)
+            - [h=1 arquivado](../blob/main/validacao/portgdp_v2/h1_arquivado/README.md)
+            `;
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              title: titulo,
+              body:  body,
+              labels: ["pim-pf-combinado", "retest", "metodologia",
+                        "linha-d", "pre-registro"],
+            });
+            core.notice(`Issue criada: ${issue.data.html_url}`);
+
+      - name: Registrar status quando re-test já feito
+        if: steps.gate.outputs.disparar == 'true' && steps.check_retest.outputs.ja_feito == 'true'
+        run: |
+          echo "::notice::Re-test já entregue — sumario_executivo.md presente. Nenhuma ação necessária."

@@ -1,0 +1,5 @@
+h,encompasser,encompassed,lambda,se_hac,t_stat,p_value,n,rejeita_H0,conclusao
+1,ardl,ar1,0.982992,0.190733,5.153769,0.000000,95,True,REJEITA H0 → encompasser NÃO contém encompassed (outro tem info útil)
+1,ar1,ardl,0.017008,0.190733,0.089173,0.928945,95,False,NÃO rejeita H0 → encompasser CONTÉM encompassed (outro é redundante)
+2,ardl,ar1,0.981007,0.255796,3.835111,0.000126,94,True,REJEITA H0 → encompasser NÃO contém encompassed (outro tem info útil)
+2,ar1,ardl,0.018993,0.255796,0.074249,0.940813,94,False,NÃO rejeita H0 → encompasser CONTÉM encompassed (outro é redundante)

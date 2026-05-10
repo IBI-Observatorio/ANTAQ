@@ -1,0 +1,71 @@
+f1,modelo,chave,f2
+0.044528,dfm_1f,Terminal Marítimo de Ponta da Madeira|Granel Sólido|Embarcados,
+-0.109889,dfm_1f,Santos|Carga Conteinerizada|Desembarcados,
+0.060623,dfm_1f,Santos|Carga Conteinerizada|Embarcados,
+-0.023020,dfm_1f,Santos|Carga Geral|Desembarcados,
+-0.004324,dfm_1f,Santos|Carga Geral|Embarcados,
+-0.098668,dfm_1f,Santos|Granel Sólido|Desembarcados,
+0.233074,dfm_1f,Santos|Granel Sólido|Embarcados,
+-0.008974,dfm_1f,Santos|Granel Líquido e Gasoso|Desembarcados,
+0.123525,dfm_1f,Santos|Granel Líquido e Gasoso|Embarcados,
+-0.030868,dfm_1f,Terminal de Tubarão|Granel Sólido|Desembarcados,
+0.002371,dfm_1f,Terminal de Tubarão|Granel Sólido|Embarcados,
+0.028736,dfm_1f,Itaguaí|Carga Conteinerizada|Desembarcados,
+0.002131,dfm_1f,Itaguaí|Carga Conteinerizada|Embarcados,
+-0.012607,dfm_1f,Itaguaí|Granel Sólido|Desembarcados,
+0.027626,dfm_1f,Itaguaí|Granel Sólido|Embarcados,
+-0.061493,dfm_1f,Terminal Aquaviário de Angra dos Reis|Granel Líquido e Gasoso|Desembarcados,
+0.038535,dfm_1f,Terminal Aquaviário de Angra dos Reis|Granel Líquido e Gasoso|Embarcados,
+-0.064922,dfm_1f,Paranaguá|Carga Conteinerizada|Desembarcados,
+0.096816,dfm_1f,Paranaguá|Carga Conteinerizada|Embarcados,
+-0.036389,dfm_1f,Paranaguá|Carga Geral|Desembarcados,
+-0.028568,dfm_1f,Paranaguá|Carga Geral|Embarcados,
+-0.125269,dfm_1f,Paranaguá|Granel Sólido|Desembarcados,
+0.172469,dfm_1f,Paranaguá|Granel Sólido|Embarcados,
+-0.084371,dfm_1f,Paranaguá|Granel Líquido e Gasoso|Desembarcados,
+0.011378,dfm_1f,Terminal da Ilha Guaíba - TIG|Granel Sólido|Embarcados,
+-0.019813,dfm_1f,Rio Grande|Carga Conteinerizada|Desembarcados,
+0.070906,dfm_1f,Rio Grande|Carga Conteinerizada|Embarcados,
+-0.017832,dfm_1f,Rio Grande|Carga Geral|Embarcados,
+-0.088938,dfm_1f,Rio Grande|Granel Sólido|Desembarcados,
+-0.051648,dfm_1f,Rio Grande|Granel Sólido|Embarcados,
+0.015307,dfm_1f,Rio Grande|Granel Líquido e Gasoso|Desembarcados,
+-0.032358,dfm_1f,Rio Grande|Granel Líquido e Gasoso|Embarcados,
+-0.009697,dfm_1f,Itaqui|Granel Sólido|Desembarcados,
+0.159924,dfm_1f,Itaqui|Granel Sólido|Embarcados,
+-0.098724,dfm_1f,Itaqui|Granel Líquido e Gasoso|Desembarcados,
+0.091906,dfm_2f,Terminal Marítimo de Ponta da Madeira|Granel Sólido|Embarcados,0.033032
+-0.170917,dfm_2f,Santos|Carga Conteinerizada|Desembarcados,0.080123
+0.147602,dfm_2f,Santos|Carga Conteinerizada|Embarcados,0.119935
+-0.057266,dfm_2f,Santos|Carga Geral|Desembarcados,-0.044120
+-0.033837,dfm_2f,Santos|Carga Geral|Embarcados,-0.060589
+-0.162437,dfm_2f,Santos|Granel Sólido|Desembarcados,0.010070
+0.397899,dfm_2f,Santos|Granel Sólido|Embarcados,-0.053049
+-0.017303,dfm_2f,Santos|Granel Líquido e Gasoso|Desembarcados,-0.020682
+0.193814,dfm_2f,Santos|Granel Líquido e Gasoso|Embarcados,-0.070829
+-0.049890,dfm_2f,Terminal de Tubarão|Granel Sólido|Desembarcados,0.019717
+0.010818,dfm_2f,Terminal de Tubarão|Granel Sólido|Embarcados,0.030450
+0.038336,dfm_2f,Itaguaí|Carga Conteinerizada|Desembarcados,-0.048059
+0.027870,dfm_2f,Itaguaí|Carga Conteinerizada|Embarcados,0.076458
+-0.015207,dfm_2f,Itaguaí|Granel Sólido|Desembarcados,0.028214
+0.078007,dfm_2f,Itaguaí|Granel Sólido|Embarcados,0.073436
+-0.099651,dfm_2f,Terminal Aquaviário de Angra dos Reis|Granel Líquido e Gasoso|Desembarcados,0.024549
+0.076582,dfm_2f,Terminal Aquaviário de Angra dos Reis|Granel Líquido e Gasoso|Embarcados,-0.001281
+-0.088337,dfm_2f,Paranaguá|Carga Conteinerizada|Desembarcados,0.066860
+0.175121,dfm_2f,Paranaguá|Carga Conteinerizada|Embarcados,0.015508
+-0.063087,dfm_2f,Paranaguá|Carga Geral|Desembarcados,-0.003667
+-0.050103,dfm_2f,Paranaguá|Carga Geral|Embarcados,-0.013591
+-0.179891,dfm_2f,Paranaguá|Granel Sólido|Desembarcados,0.076241
+0.303302,dfm_2f,Paranaguá|Granel Sólido|Embarcados,-0.014194
+-0.140978,dfm_2f,Paranaguá|Granel Líquido e Gasoso|Desembarcados,-0.002865
+0.041437,dfm_2f,Terminal da Ilha Guaíba - TIG|Granel Sólido|Embarcados,0.052240
+0.042280,dfm_2f,Rio Grande|Carga Conteinerizada|Desembarcados,0.232768
+0.188178,dfm_2f,Rio Grande|Carga Conteinerizada|Embarcados,0.184202
+-0.025833,dfm_2f,Rio Grande|Carga Geral|Embarcados,0.009567
+-0.140494,dfm_2f,Rio Grande|Granel Sólido|Desembarcados,0.056239
+-0.099931,dfm_2f,Rio Grande|Granel Sólido|Embarcados,-0.010771
+0.009451,dfm_2f,Rio Grande|Granel Líquido e Gasoso|Desembarcados,-0.066574
+-0.039215,dfm_2f,Rio Grande|Granel Líquido e Gasoso|Embarcados,0.064258
+-0.016893,dfm_2f,Itaqui|Granel Sólido|Desembarcados,0.016827
+0.257673,dfm_2f,Itaqui|Granel Sólido|Embarcados,-0.050122
+-0.185570,dfm_2f,Itaqui|Granel Líquido e Gasoso|Desembarcados,-0.012323

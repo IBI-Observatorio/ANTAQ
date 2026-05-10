@@ -1,0 +1,30 @@
+{
+  "gerado_em": "2026-05-06T02:52:18+00:00",
+  "total_indicadores": 1,
+  "clusters": [
+    {
+      "slug": "ineditas",
+      "nome": "Análises Inéditas",
+      "ordem": 7,
+      "descricao": "Indicadores originais do IBI: fingerprint operacional dos portos, custo de ineficiência por tonelada, sazonalidade latente e o PIM-PF Combinado IBI (componente DFM em horizonte bimestral).",
+      "cor": "#0099D8",
+      "indicadores": [
+        "30"
+      ]
+    }
+  ],
+  "destaques": [
+    "30"
+  ],
+  "indicadores": [
+    {
+      "id": "30",
+      "slug": "portgdp",
+      "titulo": "PIM-PF Combinado IBI — componente DFM em horizonte bimestral",
+      "cluster": "ineditas",
+      "destaque": true,
+      "granularidade": "bimestral",
+      "imagem": "figs/30_portgdp.png"
+    }
+  ]
+}

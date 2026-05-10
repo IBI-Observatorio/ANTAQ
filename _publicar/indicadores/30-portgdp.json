@@ -1,0 +1,1046 @@
+{
+  "id": "30",
+  "slug": "portgdp",
+  "titulo": "PIM-PF Combinado IBI — componente DFM em horizonte bimestral",
+  "cluster": "ineditas",
+  "destaque": true,
+  "granularidade": "bimestral",
+  "ultima_atualizacao": "2026-05-06",
+  "cobertura": {
+    "inicio": 2014,
+    "fim": 2025
+  },
+  "fonte": "ANTAQ — Estatística Aquaviária + BCB SGS 28503 (PIM-PF Indústria Geral)",
+  "descricao": "Combinação convexa entre uma previsão AR(1) do PIM-PF Indústria Geral (IBGE) e uma previsão de Dynamic Factor Model (DFM) extraído de 35 séries de movimentação portuária ANTAQ. Os pesos da combinação são estimados rolling OOS por Granger-Ramanathan a cada origem, sem look-ahead. Indicador validado **apenas em horizonte bimestral (h=2)**; em h=1 não passou no critério pré-registrado e está documentado em `h1_arquivado/`.",
+  "metodologia": "Pipeline completo: dicionário de 35 séries (top 10 portos × 4 naturezas × 2 sentidos com `FlagLongoCurso=1`, filtro de cobertura). STL para dessaz, var12m para estacionariedade. DFM-1f (1 fator, AR(2)) via Kalman MLE em `statsmodels`. Regressão de previsão `var12m(PIM)_{t+2} ~ α + γ·F_t` com HAC Newey-West (lag 12). Combinação Granger-Ramanathan rolling OOS (aquecimento 36 origens). Intervalos via split conformal padrão (Lei et al. 2018) com cobertura nominal 80%. Decisão Linha D aplicada mecanicamente conforme pré-registro em `REGRA_LANCAMENTO.md`.",
+  "achados": [],
+  "imagem": "figs/30_portgdp.png",
+  "dados": [
+    {
+      "mes": "2014-01-01",
+      "portgdp_total": 98.52074407068456,
+      "portgdp_imp": 96.06848351945081,
+      "pim_pf": 101.85492601948755
+    },
+    {
+      "mes": "2014-02-01",
+      "portgdp_total": 95.51141579067891,
+      "portgdp_imp": 99.33679091477653,
+      "pim_pf": 102.20137134608447
+    },
+    {
+      "mes": "2014-03-01",
+      "portgdp_total": 96.35287790894021,
+      "portgdp_imp": 109.87662755564294,
+      "pim_pf": 101.76831468783834
+    },
+    {
+      "mes": "2014-04-01",
+      "portgdp_total": 98.42578075415534,
+      "portgdp_imp": 92.61283782650298,
+      "pim_pf": 100.98881270299532
+    },
+    {
+      "mes": "2014-05-01",
+      "portgdp_total": 102.44854905912572,
+      "portgdp_imp": 112.4822153032699,
+      "pim_pf": 100.03608805485386
+    },
+    {
+      "mes": "2014-06-01",
+      "portgdp_total": 101.78104507620382,
+      "portgdp_imp": 115.41332267696625,
+      "pim_pf": 97.17791411042947
+    },
+    {
+      "mes": "2014-07-01",
+      "portgdp_total": 105.47716702858068,
+      "portgdp_imp": 102.82677325710104,
+      "pim_pf": 99.60303139660775
+    },
+    {
+      "mes": "2014-08-01",
+      "portgdp_total": 96.39172270729334,
+      "portgdp_imp": 98.69904984139357,
+      "pim_pf": 99.94947672320464
+    },
+    {
+      "mes": "2014-09-01",
+      "portgdp_total": 100.90513857624146,
+      "portgdp_imp": 90.24324285404307,
+      "pim_pf": 100.12269938650309
+    },
+    {
+      "mes": "2014-10-01",
+      "portgdp_total": 101.86764348746425,
+      "portgdp_imp": 97.00467284008502,
+      "pim_pf": 100.29592204980153
+    },
+    {
+      "mes": "2014-11-01",
+      "portgdp_total": 102.4654884631137,
+      "portgdp_imp": 98.4832171828972,
+      "pim_pf": 99.34319740166006
+    },
+    {
+      "mes": "2014-12-01",
+      "portgdp_total": 99.85242707751814,
+      "portgdp_imp": 86.9527662278706,
+      "pim_pf": 96.65824612053412
+    },
+    {
+      "mes": "2015-01-01",
+      "portgdp_total": 95.72158144300063,
+      "portgdp_imp": 93.41570466003013,
+      "pim_pf": 97.09130277878023
+    },
+    {
+      "mes": "2015-02-01",
+      "portgdp_total": 98.65131273257145,
+      "portgdp_imp": 97.48984164838018,
+      "pim_pf": 96.13857813063878
+    },
+    {
+      "mes": "2015-03-01",
+      "portgdp_total": 102.81229608734364,
+      "portgdp_imp": 90.65653364812631,
+      "pim_pf": 95.87874413569111
+    },
+    {
+      "mes": "2015-04-01",
+      "portgdp_total": 99.83754572912473,
+      "portgdp_imp": 88.90488696793412,
+      "pim_pf": 93.97329483940817
+    },
+    {
+      "mes": "2015-05-01",
+      "portgdp_total": 100.08077436614684,
+      "portgdp_imp": 89.04731438059873,
+      "pim_pf": 92.93395885961748
+    },
+    {
+      "mes": "2015-06-01",
+      "portgdp_total": 102.16439978726761,
+      "portgdp_imp": 96.94841391985513,
+      "pim_pf": 92.24106820642369
+    },
+    {
+      "mes": "2015-07-01",
+      "portgdp_total": 101.53150089530052,
+      "portgdp_imp": 84.73337529844022,
+      "pim_pf": 90.59545290508842
+    },
+    {
+      "mes": "2015-08-01",
+      "portgdp_total": 97.66198501597863,
+      "portgdp_imp": 78.21147872096685,
+      "pim_pf": 90.94189823168533
+    },
+    {
+      "mes": "2015-09-01",
+      "portgdp_total": 100.51289750460926,
+      "portgdp_imp": 82.9670319939085,
+      "pim_pf": 88.94983760375318
+    },
+    {
+      "mes": "2015-10-01",
+      "portgdp_total": 92.86601487898265,
+      "portgdp_imp": 70.25091440727186,
+      "pim_pf": 88.77661494045472
+    },
+    {
+      "mes": "2015-11-01",
+      "portgdp_total": 99.37613355153546,
+      "portgdp_imp": 74.05444480948444,
+      "pim_pf": 87.21761097076869
+    },
+    {
+      "mes": "2015-12-01",
+      "portgdp_total": 98.85114396201334,
+      "portgdp_imp": 69.82417183970587,
+      "pim_pf": 86.00505232767955
+    },
+    {
+      "mes": "2016-01-01",
+      "portgdp_total": 96.06670112963994,
+      "portgdp_imp": 77.72226032809992,
+      "pim_pf": 86.69794298087335
+    },
+    {
+      "mes": "2016-02-01",
+      "portgdp_total": 94.31046174461832,
+      "portgdp_imp": 74.95089300966104,
+      "pim_pf": 85.74521833273188
+    },
+    {
+      "mes": "2016-03-01",
+      "portgdp_total": 98.03181587174394,
+      "portgdp_imp": 72.84892389354987,
+      "pim_pf": 86.26488632262722
+    },
+    {
+      "mes": "2016-04-01",
+      "portgdp_total": 97.59541819401062,
+      "portgdp_imp": 77.64315495625695,
+      "pim_pf": 86.26488632262722
+    },
+    {
+      "mes": "2016-05-01",
+      "portgdp_total": 100.65900998087194,
+      "portgdp_imp": 76.70434360498088,
+      "pim_pf": 86.61133164922413
+    },
+    {
+      "mes": "2016-06-01",
+      "portgdp_total": 96.87442796804505,
+      "portgdp_imp": 72.47451065027485,
+      "pim_pf": 85.39877300613497
+    },
+    {
+      "mes": "2016-07-01",
+      "portgdp_total": 95.92173839952932,
+      "portgdp_imp": 75.54209119292244,
+      "pim_pf": 86.00505232767955
+    },
+    {
+      "mes": "2016-08-01",
+      "portgdp_total": 100.81642070382256,
+      "portgdp_imp": 74.66195405481139,
+      "pim_pf": 84.44604835799352
+    },
+    {
+      "mes": "2016-09-01",
+      "portgdp_total": 98.10451505005202,
+      "portgdp_imp": 74.36547915202627,
+      "pim_pf": 85.31216167448576
+    },
+    {
+      "mes": "2016-10-01",
+      "portgdp_total": 101.21847453989541,
+      "portgdp_imp": 72.22139819291257,
+      "pim_pf": 84.18621436304585
+    },
+    {
+      "mes": "2016-11-01",
+      "portgdp_total": 96.7963868652917,
+      "portgdp_imp": 77.7528576144873,
+      "pim_pf": 84.96571634788886
+    },
+    {
+      "mes": "2016-12-01",
+      "portgdp_total": 102.34018904150082,
+      "portgdp_imp": 79.55438387003704,
+      "pim_pf": 86.35149765427646
+    },
+    {
+      "mes": "2017-01-01",
+      "portgdp_total": 104.60874841022229,
+      "portgdp_imp": 71.55672728987535,
+      "pim_pf": 87.04438830747024
+    },
+    {
+      "mes": "2017-02-01",
+      "portgdp_total": 101.46468678410685,
+      "portgdp_imp": 80.14656818928198,
+      "pim_pf": 87.91050162396247
+    },
+    {
+      "mes": "2017-03-01",
+      "portgdp_total": 100.84628940989847,
+      "portgdp_imp": 83.03302487164763,
+      "pim_pf": 86.61133164922413
+    },
+    {
+      "mes": "2017-04-01",
+      "portgdp_total": 101.17358880318841,
+      "portgdp_imp": 78.91814312138767,
+      "pim_pf": 86.5247203175749
+    },
+    {
+      "mes": "2017-05-01",
+      "portgdp_total": 100.58334020545455,
+      "portgdp_imp": 79.6519699987755,
+      "pim_pf": 86.95777697582102
+    },
+    {
+      "mes": "2017-06-01",
+      "portgdp_total": 104.88872196135135,
+      "portgdp_imp": 97.50282688663219,
+      "pim_pf": 87.73727896066403
+    },
+    {
+      "mes": "2017-07-01",
+      "portgdp_total": 101.42657040569507,
+      "portgdp_imp": 88.74520812757407,
+      "pim_pf": 87.91050162396247
+    },
+    {
+      "mes": "2017-08-01",
+      "portgdp_total": 97.36928031100396,
+      "portgdp_imp": 86.0964283467718,
+      "pim_pf": 87.91050162396247
+    },
+    {
+      "mes": "2017-09-01",
+      "portgdp_total": 104.87199008102195,
+      "portgdp_imp": 89.12252537633884,
+      "pim_pf": 88.2569469505594
+    },
+    {
+      "mes": "2017-10-01",
+      "portgdp_total": 110.8835890961666,
+      "portgdp_imp": 90.86265957221097,
+      "pim_pf": 89.12306026705163
+    },
+    {
+      "mes": "2017-11-01",
+      "portgdp_total": 105.19234379644477,
+      "portgdp_imp": 91.84347118746138,
+      "pim_pf": 89.4695055936485
+    },
+    {
+      "mes": "2017-12-01",
+      "portgdp_total": 107.47320150631485,
+      "portgdp_imp": 86.01663483159314,
+      "pim_pf": 91.8946228798268
+    },
+    {
+      "mes": "2018-01-01",
+      "portgdp_total": 104.56635372049064,
+      "portgdp_imp": 83.03428105517526,
+      "pim_pf": 89.81595092024541
+    },
+    {
+      "mes": "2018-02-01",
+      "portgdp_total": 105.03395493795608,
+      "portgdp_imp": 78.64867117711162,
+      "pim_pf": 89.12306026705163
+    },
+    {
+      "mes": "2018-03-01",
+      "portgdp_total": 106.55585231475632,
+      "portgdp_imp": 83.17107356048227,
+      "pim_pf": 90.5088415734392
+    },
+    {
+      "mes": "2018-04-01",
+      "portgdp_total": 106.73128212403422,
+      "portgdp_imp": 81.65098813187056,
+      "pim_pf": 90.8552869000361
+    },
+    {
+      "mes": "2018-05-01",
+      "portgdp_total": 100.20180684850521,
+      "portgdp_imp": 77.3215767151561,
+      "pim_pf": 80.98159509202455
+    },
+    {
+      "mes": "2018-06-01",
+      "portgdp_total": 104.35121303411754,
+      "portgdp_imp": 85.9242081151819,
+      "pim_pf": 90.94189823168533
+    },
+    {
+      "mes": "2018-07-01",
+      "portgdp_total": 107.97603156605034,
+      "portgdp_imp": 81.21976992174378,
+      "pim_pf": 90.68206423673766
+    },
+    {
+      "mes": "2018-08-01",
+      "portgdp_total": 113.64308318873427,
+      "portgdp_imp": 90.26267178076877,
+      "pim_pf": 89.90256225189464
+    },
+    {
+      "mes": "2018-09-01",
+      "portgdp_total": 107.06174714630863,
+      "portgdp_imp": 83.85911760786325,
+      "pim_pf": 87.30422230241791
+    },
+    {
+      "mes": "2018-10-01",
+      "portgdp_total": 106.6101480752764,
+      "portgdp_imp": 82.62058690140765,
+      "pim_pf": 88.60339227715627
+    },
+    {
+      "mes": "2018-11-01",
+      "portgdp_total": 111.78244194788991,
+      "portgdp_imp": 82.9155881106197,
+      "pim_pf": 88.51678094550705
+    },
+    {
+      "mes": "2018-12-01",
+      "portgdp_total": 111.72761997694498,
+      "portgdp_imp": 75.4315462412467,
+      "pim_pf": 88.3435582822086
+    },
+    {
+      "mes": "2019-01-01",
+      "portgdp_total": 106.13865645192358,
+      "portgdp_imp": 78.72286703481356,
+      "pim_pf": 87.91050162396247
+    },
+    {
+      "mes": "2019-02-01",
+      "portgdp_total": 105.28057752959586,
+      "portgdp_imp": 83.54443052111368,
+      "pim_pf": 88.17033561891016
+    },
+    {
+      "mes": "2019-03-01",
+      "portgdp_total": 104.91522498099559,
+      "portgdp_imp": 85.26736359958394,
+      "pim_pf": 87.6506676290148
+    },
+    {
+      "mes": "2019-04-01",
+      "portgdp_total": 110.9935980114213,
+      "portgdp_imp": 87.84231366295684,
+      "pim_pf": 88.2569469505594
+    },
+    {
+      "mes": "2019-05-01",
+      "portgdp_total": 111.52176428658646,
+      "portgdp_imp": 83.32100744943807,
+      "pim_pf": 88.17033561891016
+    },
+    {
+      "mes": "2019-06-01",
+      "portgdp_total": 108.37292559804025,
+      "portgdp_imp": 89.45070071456692,
+      "pim_pf": 87.30422230241791
+    },
+    {
+      "mes": "2019-07-01",
+      "portgdp_total": 109.41121716636486,
+      "portgdp_imp": 90.13982705415422,
+      "pim_pf": 86.87116564417178
+    },
+    {
+      "mes": "2019-08-01",
+      "portgdp_total": 116.8551269814573,
+      "portgdp_imp": 89.17679740821517,
+      "pim_pf": 87.73727896066403
+    },
+    {
+      "mes": "2019-09-01",
+      "portgdp_total": 116.06202004474441,
+      "portgdp_imp": 89.44237090183367,
+      "pim_pf": 87.82389029231327
+    },
+    {
+      "mes": "2019-10-01",
+      "portgdp_total": 116.06782994402099,
+      "portgdp_imp": 86.31428078054878,
+      "pim_pf": 89.81595092024541
+    },
+    {
+      "mes": "2019-11-01",
+      "portgdp_total": 119.46042530981191,
+      "portgdp_imp": 84.70173318866726,
+      "pim_pf": 87.6506676290148
+    },
+    {
+      "mes": "2019-12-01",
+      "portgdp_total": 117.50123340622325,
+      "portgdp_imp": 83.7005421483869,
+      "pim_pf": 86.43810898592567
+    },
+    {
+      "mes": "2020-01-01",
+      "portgdp_total": 117.28714642606433,
+      "portgdp_imp": 88.4016614505955,
+      "pim_pf": 87.6506676290148
+    },
+    {
+      "mes": "2020-02-01",
+      "portgdp_total": 125.21103140294872,
+      "portgdp_imp": 85.95919567357899,
+      "pim_pf": 88.2569469505594
+    },
+    {
+      "mes": "2020-03-01",
+      "portgdp_total": 117.21913419030514,
+      "portgdp_imp": 81.70438089137718,
+      "pim_pf": 81.41465175027068
+    },
+    {
+      "mes": "2020-04-01",
+      "portgdp_total": 118.70414162469967,
+      "portgdp_imp": 81.24287313708697,
+      "pim_pf": 65.39155539516422
+    },
+    {
+      "mes": "2020-05-01",
+      "portgdp_total": 119.08018338929163,
+      "portgdp_imp": 70.64574238509836,
+      "pim_pf": 70.4150126308192
+    },
+    {
+      "mes": "2020-06-01",
+      "portgdp_total": 115.59015163894601,
+      "portgdp_imp": 58.250339644834284,
+      "pim_pf": 77.51714182605559
+    },
+    {
+      "mes": "2020-07-01",
+      "portgdp_total": 117.07424912157119,
+      "portgdp_imp": 62.098559775249115,
+      "pim_pf": 84.53265968964274
+    },
+    {
+      "mes": "2020-08-01",
+      "portgdp_total": 125.15913772120466,
+      "portgdp_imp": 68.66619281468438,
+      "pim_pf": 87.21761097076869
+    },
+    {
+      "mes": "2020-09-01",
+      "portgdp_total": 122.5044277147725,
+      "portgdp_imp": 72.11632833730057,
+      "pim_pf": 89.55611692529774
+    },
+    {
+      "mes": "2020-10-01",
+      "portgdp_total": 128.81283061516905,
+      "portgdp_imp": 85.38175495065758,
+      "pim_pf": 90.94189823168533
+    },
+    {
+      "mes": "2020-11-01",
+      "portgdp_total": 135.03706387721422,
+      "portgdp_imp": 108.08204832019341,
+      "pim_pf": 91.28834355828222
+    },
+    {
+      "mes": "2020-12-01",
+      "portgdp_total": 128.49777922987892,
+      "portgdp_imp": 105.14429271959396,
+      "pim_pf": 90.8552869000361
+    },
+    {
+      "mes": "2021-01-01",
+      "portgdp_total": 130.43391681012474,
+      "portgdp_imp": 96.81399494447052,
+      "pim_pf": 91.46156622158067
+    },
+    {
+      "mes": "2021-02-01",
+      "portgdp_total": 134.94512262105945,
+      "portgdp_imp": 107.70005607782558,
+      "pim_pf": 90.1623962468423
+    },
+    {
+      "mes": "2021-03-01",
+      "portgdp_total": 134.71321724024145,
+      "portgdp_imp": 104.68981610777644,
+      "pim_pf": 88.3435582822086
+    },
+    {
+      "mes": "2021-04-01",
+      "portgdp_total": 136.69076830674203,
+      "portgdp_imp": 109.3693841490132,
+      "pim_pf": 86.69794298087335
+    },
+    {
+      "mes": "2021-05-01",
+      "portgdp_total": 136.57334392156847,
+      "portgdp_imp": 102.64228248595735,
+      "pim_pf": 87.6506676290148
+    },
+    {
+      "mes": "2021-06-01",
+      "portgdp_total": 128.8397886176994,
+      "portgdp_imp": 99.99830841957687,
+      "pim_pf": 87.30422230241791
+    },
+    {
+      "mes": "2021-07-01",
+      "portgdp_total": 132.60789919053587,
+      "portgdp_imp": 102.71226256271346,
+      "pim_pf": 86.00505232767955
+    },
+    {
+      "mes": "2021-08-01",
+      "portgdp_total": 136.75481968678767,
+      "portgdp_imp": 100.26676127546258,
+      "pim_pf": 86.09166365932877
+    },
+    {
+      "mes": "2021-09-01",
+      "portgdp_total": 125.84201281173499,
+      "portgdp_imp": 101.1872016422336,
+      "pim_pf": 85.8318296643811
+    },
+    {
+      "mes": "2021-10-01",
+      "portgdp_total": 129.08224809257135,
+      "portgdp_imp": 99.53684295779273,
+      "pim_pf": 85.48538433778421
+    },
+    {
+      "mes": "2021-11-01",
+      "portgdp_total": 132.93095409467156,
+      "portgdp_imp": 101.5336387313748,
+      "pim_pf": 85.48538433778421
+    },
+    {
+      "mes": "2021-12-01",
+      "portgdp_total": 130.35735059094105,
+      "portgdp_imp": 104.84823687377303,
+      "pim_pf": 86.78455431252257
+    },
+    {
+      "mes": "2022-01-01",
+      "portgdp_total": 134.72975050780448,
+      "portgdp_imp": 93.53678958103687,
+      "pim_pf": 86.61133164922413
+    },
+    {
+      "mes": "2022-02-01",
+      "portgdp_total": 130.30598350870446,
+      "portgdp_imp": 96.09654544984565,
+      "pim_pf": 87.39083363406715
+    },
+    {
+      "mes": "2022-03-01",
+      "portgdp_total": 129.3300334562467,
+      "portgdp_imp": 86.48086920146704,
+      "pim_pf": 86.69794298087335
+    },
+    {
+      "mes": "2022-04-01",
+      "portgdp_total": 136.86803814852004,
+      "portgdp_imp": 90.42625852585043,
+      "pim_pf": 87.21761097076869
+    },
+    {
+      "mes": "2022-05-01",
+      "portgdp_total": 140.63410750681302,
+      "portgdp_imp": 95.50226366753333,
+      "pim_pf": 86.78455431252257
+    },
+    {
+      "mes": "2022-06-01",
+      "portgdp_total": 133.83892798639306,
+      "portgdp_imp": 85.17063807192156,
+      "pim_pf": 86.78455431252257
+    },
+    {
+      "mes": "2022-07-01",
+      "portgdp_total": 130.93574091058636,
+      "portgdp_imp": 96.07048341290994,
+      "pim_pf": 87.56405629736558
+    },
+    {
+      "mes": "2022-08-01",
+      "portgdp_total": 127.51064463826836,
+      "portgdp_imp": 94.03801523646749,
+      "pim_pf": 86.43810898592567
+    },
+    {
+      "mes": "2022-09-01",
+      "portgdp_total": 139.42010659798981,
+      "portgdp_imp": 103.8608646377011,
+      "pim_pf": 85.05232767953808
+    },
+    {
+      "mes": "2022-10-01",
+      "portgdp_total": 139.29757971789488,
+      "portgdp_imp": 100.10985597025972,
+      "pim_pf": 86.43810898592567
+    },
+    {
+      "mes": "2022-11-01",
+      "portgdp_total": 124.81381135203407,
+      "portgdp_imp": 85.37948222224216,
+      "pim_pf": 86.43810898592567
+    },
+    {
+      "mes": "2022-12-01",
+      "portgdp_total": 133.44233717831767,
+      "portgdp_imp": 103.99559748864422,
+      "pim_pf": 86.5247203175749
+    },
+    {
+      "mes": "2023-01-01",
+      "portgdp_total": 136.6376998548035,
+      "portgdp_imp": 93.31279142766266,
+      "pim_pf": 86.35149765427646
+    },
+    {
+      "mes": "2023-02-01",
+      "portgdp_total": 133.34788404747366,
+      "portgdp_imp": 83.30119479956682,
+      "pim_pf": 86.178274990978
+    },
+    {
+      "mes": "2023-03-01",
+      "portgdp_total": 134.77037050323952,
+      "portgdp_imp": 98.92747948419391,
+      "pim_pf": 86.95777697582102
+    },
+    {
+      "mes": "2023-04-01",
+      "portgdp_total": 135.83335557053354,
+      "portgdp_imp": 91.69669924391005,
+      "pim_pf": 86.5247203175749
+    },
+    {
+      "mes": "2023-05-01",
+      "portgdp_total": 133.33626865886515,
+      "portgdp_imp": 100.65646420586984,
+      "pim_pf": 87.13099963911947
+    },
+    {
+      "mes": "2023-06-01",
+      "portgdp_total": 135.1794124292657,
+      "portgdp_imp": 95.4660647008286,
+      "pim_pf": 86.69794298087335
+    },
+    {
+      "mes": "2023-07-01",
+      "portgdp_total": 142.52118243661894,
+      "portgdp_imp": 98.50365419244785,
+      "pim_pf": 86.178274990978
+    },
+    {
+      "mes": "2023-08-01",
+      "portgdp_total": 135.75107800026302,
+      "portgdp_imp": 91.85021415390156,
+      "pim_pf": 86.61133164922413
+    },
+    {
+      "mes": "2023-09-01",
+      "portgdp_total": 135.22053699984195,
+      "portgdp_imp": 88.16008732448725,
+      "pim_pf": 86.26488632262722
+    },
+    {
+      "mes": "2023-10-01",
+      "portgdp_total": 134.35152980035656,
+      "portgdp_imp": 92.2466539490777,
+      "pim_pf": 86.69794298087335
+    },
+    {
+      "mes": "2023-11-01",
+      "portgdp_total": 136.05571580978219,
+      "portgdp_imp": 84.46708917228175,
+      "pim_pf": 87.6506676290148
+    },
+    {
+      "mes": "2023-12-01",
+      "portgdp_total": 134.40892937647723,
+      "portgdp_imp": 92.04410233560158,
+      "pim_pf": 89.29628293035007
+    },
+    {
+      "mes": "2024-01-01",
+      "portgdp_total": 142.85277025021693,
+      "portgdp_imp": 107.44156844080703,
+      "pim_pf": 88.08372428726094
+    },
+    {
+      "mes": "2024-02-01",
+      "portgdp_total": 148.1946611916772,
+      "portgdp_imp": 95.8025509217126,
+      "pim_pf": 88.08372428726094
+    },
+    {
+      "mes": "2024-03-01",
+      "portgdp_total": 141.60544530426515,
+      "portgdp_imp": 101.48445903871097,
+      "pim_pf": 88.51678094550705
+    },
+    {
+      "mes": "2024-04-01",
+      "portgdp_total": 137.0441051115907,
+      "portgdp_imp": 100.04311896711052,
+      "pim_pf": 88.2569469505594
+    },
+    {
+      "mes": "2024-05-01",
+      "portgdp_total": 135.859219449177,
+      "portgdp_imp": 108.19434785238118,
+      "pim_pf": 87.13099963911947
+    },
+    {
+      "mes": "2024-06-01",
+      "portgdp_total": 148.78641584299172,
+      "portgdp_imp": 106.32210545118244,
+      "pim_pf": 91.02850956333455
+    },
+    {
+      "mes": "2024-07-01",
+      "portgdp_total": 141.16949843086923,
+      "portgdp_imp": 112.31686458804224,
+      "pim_pf": 89.64272825694697
+    },
+    {
+      "mes": "2024-08-01",
+      "portgdp_total": 142.67279073770962,
+      "portgdp_imp": 123.62138140554728,
+      "pim_pf": 89.4695055936485
+    },
+    {
+      "mes": "2024-09-01",
+      "portgdp_total": 142.1001462850676,
+      "portgdp_imp": 119.56900704982318,
+      "pim_pf": 90.33561891014075
+    },
+    {
+      "mes": "2024-10-01",
+      "portgdp_total": 135.2971775102707,
+      "portgdp_imp": 120.24354766904493,
+      "pim_pf": 90.33561891014075
+    },
+    {
+      "mes": "2024-11-01",
+      "portgdp_total": 134.76309721867426,
+      "portgdp_imp": 102.6225346562748,
+      "pim_pf": 89.81595092024541
+    },
+    {
+      "mes": "2024-12-01",
+      "portgdp_total": 137.74204244816735,
+      "portgdp_imp": 108.7839047030156,
+      "pim_pf": 89.81595092024541
+    },
+    {
+      "mes": "2025-01-01",
+      "portgdp_total": 141.7560833190527,
+      "portgdp_imp": 112.57614630340281,
+      "pim_pf": 89.72933958859618
+    },
+    {
+      "mes": "2025-02-01",
+      "portgdp_total": 137.54733868566947,
+      "portgdp_imp": 112.10504827479535,
+      "pim_pf": 89.20967159870085
+    },
+    {
+      "mes": "2025-03-01",
+      "portgdp_total": 148.13992577010467,
+      "portgdp_imp": 108.32039672750258,
+      "pim_pf": 90.94189823168533
+    },
+    {
+      "mes": "2025-04-01",
+      "portgdp_total": 140.60908269332776,
+      "portgdp_imp": 110.22222435217664,
+      "pim_pf": 90.42223024178999
+    },
+    {
+      "mes": "2025-05-01",
+      "portgdp_total": 149.23982835214397,
+      "portgdp_imp": 120.73186310594708,
+      "pim_pf": 89.90256225189464
+    },
+    {
+      "mes": "2025-06-01",
+      "portgdp_total": 153.37259434684282,
+      "portgdp_imp": 116.70030038978885,
+      "pim_pf": 89.98917358354387
+    },
+    {
+      "mes": "2025-07-01",
+      "portgdp_total": 149.06218268702057,
+      "portgdp_imp": 112.68002002862296,
+      "pim_pf": 89.81595092024541
+    },
+    {
+      "mes": "2025-08-01",
+      "portgdp_total": 160.84220079790262,
+      "portgdp_imp": 111.07967964556855,
+      "pim_pf": 90.5088415734392
+    },
+    {
+      "mes": "2025-09-01",
+      "portgdp_total": 150.61774792216792,
+      "portgdp_imp": 113.4719358845371,
+      "pim_pf": 90.1623962468423
+    },
+    {
+      "mes": "2025-10-01",
+      "portgdp_total": 149.75870423702213,
+      "portgdp_imp": 109.25192224546079,
+      "pim_pf": 90.24900757849153
+    },
+    {
+      "mes": "2025-11-01",
+      "portgdp_total": 148.46514927091388,
+      "portgdp_imp": 123.75021007483402,
+      "pim_pf": 90.1623962468423
+    },
+    {
+      "mes": "2025-12-01",
+      "portgdp_total": 153.0476203239543,
+      "portgdp_imp": 115.22602576347336,
+      "pim_pf": 88.3435582822086
+    }
+  ],
+  "grafico": {
+    "tipo": "line_dual",
+    "x": "mes",
+    "series": [
+      {
+        "y": "portgdp_imp",
+        "label": "PortGDP Importações",
+        "cor": "#7fb069"
+      },
+      {
+        "y": "pim_pf",
+        "label": "PIM-PF (IBGE)",
+        "cor": "#c1322f"
+      }
+    ],
+    "label_x": "Mês",
+    "label_y": "Índice (base 2014 = 100)"
+  },
+  "subtitulo": "Modelo combinado AR(1) + fatores latentes da movimentação portuária para previsão da produção industrial 2 meses à frente.",
+  "categoria": "Inédita",
+  "badge": "Linha D · validado · re-test mai/2028",
+  "tags": [
+    "pim-pf",
+    "producao-industrial",
+    "dfm",
+    "combinacao-granger-ramanathan",
+    "conformal",
+    "linha-d",
+    "bimestral"
+  ],
+  "links_transparencia": {
+    "nota_tecnica": "docs/nota_tecnica_pimpf_combinado_v1.md",
+    "h1_arquivado": "validacao/portgdp_v2/h1_arquivado/README.md",
+    "compromisso_retest": "validacao/portgdp_v2/compromisso_retest_2028.md"
+  },
+  "card_previsao_atual": {
+    "mes_alvo": "2026-02",
+    "horizonte": 2,
+    "var12m_prevista_pp": -1.497,
+    "intervalo_inferior_pp": -6.081,
+    "intervalo_superior_pp": 3.0869,
+    "peso_dfm": 0.3179,
+    "ultima_obs_pim_pf": "2025-12-01",
+    "data_emissao": "2026-05-05",
+    "modelo_dfm": "dfm_2026"
+  },
+  "metricas_producao": {
+    "n_previsoes": 0,
+    "mensagem": "Aguardando 6 previsões com realizado para reportar métricas em produção (atual: 0).",
+    "mae_validacao_historica_pp": 3.01
+  },
+  "disclaimer_vintage": "Validação realizada em série revisada do PIM-PF (BCB SGS 28503). Performance em previsão real, contra primeiro vintage publicado pelo IBGE, pode degradar 10–25% conforme literatura padrão de nowcasting macroeconômico. Snapshots de cada release do PIM-PF e da ANTAQ são arquivados desde mai/2026 para análise comparativa de degradação por revisão, a ser publicada na re-validação de mai/2028.",
+  "track_record": [
+    {
+      "mes_alvo": "2025-03",
+      "horizonte": 2,
+      "previsto_pp": 1.0889,
+      "realizado_pp": 2.7397,
+      "erro_abs_pp": 1.6507999999999998,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-04",
+      "horizonte": 2,
+      "previsto_pp": 0.6404,
+      "realizado_pp": 2.4534000000000002,
+      "erro_abs_pp": 1.813,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-05",
+      "horizonte": 2,
+      "previsto_pp": 0.9728000000000001,
+      "realizado_pp": 3.1809,
+      "erro_abs_pp": 2.2081,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-06",
+      "horizonte": 2,
+      "previsto_pp": 0.9341999999999999,
+      "realizado_pp": -1.1418,
+      "erro_abs_pp": 2.076,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-07",
+      "horizonte": 2,
+      "previsto_pp": 1.3275000000000001,
+      "realizado_pp": 0.19319999999999998,
+      "erro_abs_pp": 1.1343,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-08",
+      "horizonte": 2,
+      "previsto_pp": -0.23839999999999997,
+      "realizado_pp": 1.1617,
+      "erro_abs_pp": 1.4001,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-09",
+      "horizonte": 2,
+      "previsto_pp": 0.2762,
+      "realizado_pp": -0.1918,
+      "erro_abs_pp": 0.468,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-10",
+      "horizonte": 2,
+      "previsto_pp": 0.5202,
+      "realizado_pp": -0.0959,
+      "erro_abs_pp": 0.6161,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-11",
+      "horizonte": 2,
+      "previsto_pp": 0.0857,
+      "realizado_pp": 0.38570000000000004,
+      "erro_abs_pp": 0.3,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2025-12",
+      "horizonte": 2,
+      "previsto_pp": -0.1188,
+      "realizado_pp": -1.6393000000000002,
+      "erro_abs_pp": 1.5205,
+      "dentro_intervalo": true,
+      "tipo": "validacao_historica"
+    },
+    {
+      "mes_alvo": "2026-01",
+      "horizonte": 1,
+      "previsto_pp": -1.4586,
+      "realizado_pp": null,
+      "erro_abs_pp": null,
+      "dentro_intervalo": null,
+      "tipo": "producao"
+    },
+    {
+      "mes_alvo": "2026-02",
+      "horizonte": 2,
+      "previsto_pp": -1.497,
+      "realizado_pp": null,
+      "erro_abs_pp": null,
+      "dentro_intervalo": null,
+      "tipo": "producao"
+    }
+  ]
+}

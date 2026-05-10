@@ -1,0 +1,81 @@
+chave,porto,natureza,sentido,n_obs,n_nan,n_zero,streak_nan_max,excluida,motivo
+Terminal Marítimo de Ponta da Madeira|Carga Conteinerizada|Desembarcados,Terminal Marítimo de Ponta da Madeira,Carga Conteinerizada,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Marítimo de Ponta da Madeira|Carga Conteinerizada|Embarcados,Terminal Marítimo de Ponta da Madeira,Carga Conteinerizada,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Marítimo de Ponta da Madeira|Carga Geral|Desembarcados,Terminal Marítimo de Ponta da Madeira,Carga Geral,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Marítimo de Ponta da Madeira|Carga Geral|Embarcados,Terminal Marítimo de Ponta da Madeira,Carga Geral,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Marítimo de Ponta da Madeira|Granel Sólido|Desembarcados,Terminal Marítimo de Ponta da Madeira,Granel Sólido,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Marítimo de Ponta da Madeira|Granel Sólido|Embarcados,Terminal Marítimo de Ponta da Madeira,Granel Sólido,Embarcados,144,0,0,0,False,
+Terminal Marítimo de Ponta da Madeira|Granel Líquido e Gasoso|Desembarcados,Terminal Marítimo de Ponta da Madeira,Granel Líquido e Gasoso,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Marítimo de Ponta da Madeira|Granel Líquido e Gasoso|Embarcados,Terminal Marítimo de Ponta da Madeira,Granel Líquido e Gasoso,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Santos|Carga Conteinerizada|Desembarcados,Santos,Carga Conteinerizada,Desembarcados,144,0,0,0,False,
+Santos|Carga Conteinerizada|Embarcados,Santos,Carga Conteinerizada,Embarcados,144,0,0,0,False,
+Santos|Carga Geral|Desembarcados,Santos,Carga Geral,Desembarcados,144,0,0,0,False,
+Santos|Carga Geral|Embarcados,Santos,Carga Geral,Embarcados,144,0,0,0,False,
+Santos|Granel Sólido|Desembarcados,Santos,Granel Sólido,Desembarcados,144,0,0,0,False,
+Santos|Granel Sólido|Embarcados,Santos,Granel Sólido,Embarcados,144,0,0,0,False,
+Santos|Granel Líquido e Gasoso|Desembarcados,Santos,Granel Líquido e Gasoso,Desembarcados,144,0,0,0,False,
+Santos|Granel Líquido e Gasoso|Embarcados,Santos,Granel Líquido e Gasoso,Embarcados,144,0,0,0,False,
+Terminal de Tubarão|Carga Conteinerizada|Desembarcados,Terminal de Tubarão,Carga Conteinerizada,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal de Tubarão|Carga Conteinerizada|Embarcados,Terminal de Tubarão,Carga Conteinerizada,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal de Tubarão|Carga Geral|Desembarcados,Terminal de Tubarão,Carga Geral,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal de Tubarão|Carga Geral|Embarcados,Terminal de Tubarão,Carga Geral,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal de Tubarão|Granel Sólido|Desembarcados,Terminal de Tubarão,Granel Sólido,Desembarcados,131,13,0,2,False,
+Terminal de Tubarão|Granel Sólido|Embarcados,Terminal de Tubarão,Granel Sólido,Embarcados,144,0,0,0,False,
+Terminal de Tubarão|Granel Líquido e Gasoso|Desembarcados,Terminal de Tubarão,Granel Líquido e Gasoso,Desembarcados,24,120,0,64,True,120 meses zero/NA > 24
+Terminal de Tubarão|Granel Líquido e Gasoso|Embarcados,Terminal de Tubarão,Granel Líquido e Gasoso,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Itaguaí|Carga Conteinerizada|Desembarcados,Itaguaí,Carga Conteinerizada,Desembarcados,144,0,0,0,False,
+Itaguaí|Carga Conteinerizada|Embarcados,Itaguaí,Carga Conteinerizada,Embarcados,144,0,0,0,False,
+Itaguaí|Carga Geral|Desembarcados,Itaguaí,Carga Geral,Desembarcados,122,22,0,3,True,streak NaN consecutivo 3 > 2
+Itaguaí|Carga Geral|Embarcados,Itaguaí,Carga Geral,Embarcados,134,10,0,8,True,streak NaN consecutivo 8 > 2
+Itaguaí|Granel Sólido|Desembarcados,Itaguaí,Granel Sólido,Desembarcados,144,0,0,0,False,
+Itaguaí|Granel Sólido|Embarcados,Itaguaí,Granel Sólido,Embarcados,144,0,0,0,False,
+Itaguaí|Granel Líquido e Gasoso|Desembarcados,Itaguaí,Granel Líquido e Gasoso,Desembarcados,2,142,0,55,True,142 meses zero/NA > 24
+Itaguaí|Granel Líquido e Gasoso|Embarcados,Itaguaí,Granel Líquido e Gasoso,Embarcados,1,143,0,88,True,143 meses zero/NA > 24
+Terminal Aquaviário de São Sebastião (Almirante Barroso)|Carga Conteinerizada|Desembarcados,Terminal Aquaviário de São Sebastião (Almirante Barroso),Carga Conteinerizada,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de São Sebastião (Almirante Barroso)|Carga Conteinerizada|Embarcados,Terminal Aquaviário de São Sebastião (Almirante Barroso),Carga Conteinerizada,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de São Sebastião (Almirante Barroso)|Carga Geral|Desembarcados,Terminal Aquaviário de São Sebastião (Almirante Barroso),Carga Geral,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de São Sebastião (Almirante Barroso)|Carga Geral|Embarcados,Terminal Aquaviário de São Sebastião (Almirante Barroso),Carga Geral,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de São Sebastião (Almirante Barroso)|Granel Sólido|Desembarcados,Terminal Aquaviário de São Sebastião (Almirante Barroso),Granel Sólido,Desembarcados,1,143,0,116,True,143 meses zero/NA > 24
+Terminal Aquaviário de São Sebastião (Almirante Barroso)|Granel Sólido|Embarcados,Terminal Aquaviário de São Sebastião (Almirante Barroso),Granel Sólido,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de São Sebastião (Almirante Barroso)|Granel Líquido e Gasoso|Desembarcados,Terminal Aquaviário de São Sebastião (Almirante Barroso),Granel Líquido e Gasoso,Desembarcados,130,14,0,3,True,streak NaN consecutivo 3 > 2
+Terminal Aquaviário de São Sebastião (Almirante Barroso)|Granel Líquido e Gasoso|Embarcados,Terminal Aquaviário de São Sebastião (Almirante Barroso),Granel Líquido e Gasoso,Embarcados,105,39,0,9,True,39 meses zero/NA > 24
+Terminal Aquaviário de Angra dos Reis|Carga Conteinerizada|Desembarcados,Terminal Aquaviário de Angra dos Reis,Carga Conteinerizada,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de Angra dos Reis|Carga Conteinerizada|Embarcados,Terminal Aquaviário de Angra dos Reis,Carga Conteinerizada,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de Angra dos Reis|Carga Geral|Desembarcados,Terminal Aquaviário de Angra dos Reis,Carga Geral,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de Angra dos Reis|Carga Geral|Embarcados,Terminal Aquaviário de Angra dos Reis,Carga Geral,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de Angra dos Reis|Granel Sólido|Desembarcados,Terminal Aquaviário de Angra dos Reis,Granel Sólido,Desembarcados,1,143,0,121,True,143 meses zero/NA > 24
+Terminal Aquaviário de Angra dos Reis|Granel Sólido|Embarcados,Terminal Aquaviário de Angra dos Reis,Granel Sólido,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal Aquaviário de Angra dos Reis|Granel Líquido e Gasoso|Desembarcados,Terminal Aquaviário de Angra dos Reis,Granel Líquido e Gasoso,Desembarcados,142,2,0,1,False,
+Terminal Aquaviário de Angra dos Reis|Granel Líquido e Gasoso|Embarcados,Terminal Aquaviário de Angra dos Reis,Granel Líquido e Gasoso,Embarcados,144,0,0,0,False,
+Paranaguá|Carga Conteinerizada|Desembarcados,Paranaguá,Carga Conteinerizada,Desembarcados,144,0,0,0,False,
+Paranaguá|Carga Conteinerizada|Embarcados,Paranaguá,Carga Conteinerizada,Embarcados,144,0,0,0,False,
+Paranaguá|Carga Geral|Desembarcados,Paranaguá,Carga Geral,Desembarcados,144,0,0,0,False,
+Paranaguá|Carga Geral|Embarcados,Paranaguá,Carga Geral,Embarcados,144,0,0,0,False,
+Paranaguá|Granel Sólido|Desembarcados,Paranaguá,Granel Sólido,Desembarcados,144,0,0,0,False,
+Paranaguá|Granel Sólido|Embarcados,Paranaguá,Granel Sólido,Embarcados,144,0,0,0,False,
+Paranaguá|Granel Líquido e Gasoso|Desembarcados,Paranaguá,Granel Líquido e Gasoso,Desembarcados,144,0,0,0,False,
+Paranaguá|Granel Líquido e Gasoso|Embarcados,Paranaguá,Granel Líquido e Gasoso,Embarcados,86,58,0,17,True,58 meses zero/NA > 24
+Terminal da Ilha Guaíba - TIG|Carga Conteinerizada|Desembarcados,Terminal da Ilha Guaíba - TIG,Carga Conteinerizada,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal da Ilha Guaíba - TIG|Carga Conteinerizada|Embarcados,Terminal da Ilha Guaíba - TIG,Carga Conteinerizada,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal da Ilha Guaíba - TIG|Carga Geral|Desembarcados,Terminal da Ilha Guaíba - TIG,Carga Geral,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal da Ilha Guaíba - TIG|Carga Geral|Embarcados,Terminal da Ilha Guaíba - TIG,Carga Geral,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal da Ilha Guaíba - TIG|Granel Sólido|Desembarcados,Terminal da Ilha Guaíba - TIG,Granel Sólido,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal da Ilha Guaíba - TIG|Granel Sólido|Embarcados,Terminal da Ilha Guaíba - TIG,Granel Sólido,Embarcados,144,0,0,0,False,
+Terminal da Ilha Guaíba - TIG|Granel Líquido e Gasoso|Desembarcados,Terminal da Ilha Guaíba - TIG,Granel Líquido e Gasoso,Desembarcados,0,144,0,144,True,144 meses zero/NA > 24
+Terminal da Ilha Guaíba - TIG|Granel Líquido e Gasoso|Embarcados,Terminal da Ilha Guaíba - TIG,Granel Líquido e Gasoso,Embarcados,0,144,0,144,True,144 meses zero/NA > 24
+Rio Grande|Carga Conteinerizada|Desembarcados,Rio Grande,Carga Conteinerizada,Desembarcados,144,0,0,0,False,
+Rio Grande|Carga Conteinerizada|Embarcados,Rio Grande,Carga Conteinerizada,Embarcados,144,0,0,0,False,
+Rio Grande|Carga Geral|Desembarcados,Rio Grande,Carga Geral,Desembarcados,117,27,0,6,True,27 meses zero/NA > 24
+Rio Grande|Carga Geral|Embarcados,Rio Grande,Carga Geral,Embarcados,144,0,0,0,False,
+Rio Grande|Granel Sólido|Desembarcados,Rio Grande,Granel Sólido,Desembarcados,144,0,0,0,False,
+Rio Grande|Granel Sólido|Embarcados,Rio Grande,Granel Sólido,Embarcados,144,0,0,0,False,
+Rio Grande|Granel Líquido e Gasoso|Desembarcados,Rio Grande,Granel Líquido e Gasoso,Desembarcados,144,0,0,0,False,
+Rio Grande|Granel Líquido e Gasoso|Embarcados,Rio Grande,Granel Líquido e Gasoso,Embarcados,144,0,0,0,False,
+Itaqui|Carga Conteinerizada|Desembarcados,Itaqui,Carga Conteinerizada,Desembarcados,48,96,0,45,True,96 meses zero/NA > 24
+Itaqui|Carga Conteinerizada|Embarcados,Itaqui,Carga Conteinerizada,Embarcados,9,135,0,59,True,135 meses zero/NA > 24
+Itaqui|Carga Geral|Desembarcados,Itaqui,Carga Geral,Desembarcados,101,43,0,3,True,43 meses zero/NA > 24
+Itaqui|Carga Geral|Embarcados,Itaqui,Carga Geral,Embarcados,140,4,0,3,True,streak NaN consecutivo 3 > 2
+Itaqui|Granel Sólido|Desembarcados,Itaqui,Granel Sólido,Desembarcados,144,0,0,0,False,
+Itaqui|Granel Sólido|Embarcados,Itaqui,Granel Sólido,Embarcados,144,0,0,0,False,
+Itaqui|Granel Líquido e Gasoso|Desembarcados,Itaqui,Granel Líquido e Gasoso,Desembarcados,144,0,0,0,False,
+Itaqui|Granel Líquido e Gasoso|Embarcados,Itaqui,Granel Líquido e Gasoso,Embarcados,20,124,0,40,True,124 meses zero/NA > 24

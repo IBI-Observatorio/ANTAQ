@@ -1,0 +1,5 @@
+h,modelo_alvo,baseline,dm_stat,p_value,n
+1,dfm_1f,ar1,2.417144,0.017594,94
+1,dfm_1f,ardl,1.792817,0.076253,94
+1,dfm_2f,ar1,4.044974,0.000108,94
+1,dfm_2f,ardl,4.125992,8e-05,94

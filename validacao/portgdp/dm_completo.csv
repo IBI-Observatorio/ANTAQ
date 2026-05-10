@@ -1,0 +1,11 @@
+h,modelo_alvo,baseline,dm_stat,p_value,n
+1,ardl,ar1,2.062640,0.041905,95
+2,ardl,ar1,1.077475,0.284055,94
+1,ens_mediana,ar1,1.122603,0.264465,95
+1,ens_mediana,ardl,-2.700972,0.008201,95
+2,ens_mediana,ar1,0.615764,0.539555,94
+2,ens_mediana,ardl,-1.377523,0.171657,94
+1,ens_media,ar1,1.122603,0.264465,95
+1,ens_media,ardl,-2.700972,0.008201,95
+2,ens_media,ar1,0.615764,0.539555,94
+2,ens_media,ardl,-1.377523,0.171657,94

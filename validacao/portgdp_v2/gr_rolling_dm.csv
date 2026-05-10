@@ -1,0 +1,5 @@
+h,comparacao,dm_stat,p_value,n
+1,comb_oos vs ar1,0.465020,0.643689,58
+1,comb_oos vs dfm_1f,-1.924184,0.059329,58
+2,comb_oos vs ar1,-0.313820,0.754803,58
+2,comb_oos vs dfm_1f,-1.377803,0.173650,58

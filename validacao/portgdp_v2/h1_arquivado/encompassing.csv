@@ -1,0 +1,5 @@
+h,encompasser,encompassed,lambda,se_hac,t_stat,p_value,n,rejeita_H0
+1,dfm_1f,ar1,0.821849,0.109701,7.491749,0.0,94,True
+1,ar1,dfm_1f,0.178151,0.109701,1.623976,0.104381,94,False
+1,dfm_2f,ar1,0.969207,0.085012,11.400767,0.0,94,True
+1,ar1,dfm_2f,0.030793,0.085012,0.362221,0.717187,94,False

@@ -1,0 +1,19 @@
+# Dados brutos e arquivos gerados (muito grandes para o Git)
+dados/
+parquet/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db

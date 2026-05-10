@@ -1,0 +1,6 @@
+teste,stat,p_value
+Ljung-Box (lag 12),31.254045,0.001802
+Ljung-Box (lag 24),59.241985,0.000082
+Breusch-Godfrey (lag 12),29.545173,0.003268
+Jarque-Bera,1936.515153,0.000000
+ARCH-LM (lag 12),23.482627,0.023897
