@@ -37,7 +37,7 @@ NATUREZAS = (
 )
 SENTIDOS = ("Desembarcados", "Embarcados")
 PERIODO_INI = "2014-01-01"
-PERIODO_FIM = "2026-01-01"
+PERIODO_FIM = "2026-02-01"
 LIMITE_FALTANTES = 24  # meses
 
 
@@ -99,7 +99,7 @@ def montar_painel(df_long: pd.DataFrame, portos: list[str]) -> pd.DataFrame:
                                   values="ton", aggfunc="sum")
                     .sort_index())
     # Garante grade mensal completa
-    idx = pd.date_range(PERIODO_INI, "2025-12-01", freq="MS")
+    idx = pd.date_range(PERIODO_INI, PERIODO_FIM, freq="MS")
     pivot = pivot.reindex(idx)
     pivot.index.name = "mes"
 

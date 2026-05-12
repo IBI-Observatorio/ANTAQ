@@ -672,8 +672,14 @@ def _construir_extras_card_pim_pf() -> dict:
     aberta = df[(df["tipo"] == "producao") &
                   (df["realizado"].isna() | (df["realizado"] == ""))]
     if len(aberta) > 0:
-        # h=2 publicada se houver, senão h=1
-        aberta = aberta.sort_values(["horizonte"], ascending=False)
+        # Prioriza: emissão mais recente → última obs PIM-PF mais recente
+        # → h=2 (publicada). Evita pegar rodadas obsoletas do mesmo dia.
+        aberta = aberta.copy()
+        aberta["_ultima_obs_dt"] = pd.to_datetime(aberta["ultima_obs_pim_pf"])
+        aberta = aberta.sort_values(
+            ["data_emissao", "_ultima_obs_dt", "horizonte"],
+            ascending=[False, False, False],
+        )
         atual = aberta.iloc[0]
         extras["card_previsao_atual"] = {
             "mes_alvo":              atual["mes_alvo"].strftime("%Y-%m"),
