@@ -1,0 +1,1 @@
+{"gerado_em":"2026-05-22T18:42:38+00:00","ultimo_mes_dados":"2026-02","fonte":"ANTAQ — Base Estatística Aquaviária","filtro":"FlagMCOperacaoCarga = 1 (evita dupla contagem cabotagem)","janela_ma":12,"ano_inicio":2010,"arquivos":["meta","kpis","series_mensais","momentum","stl","granel_liquido","rotas","portos","forecast"]}

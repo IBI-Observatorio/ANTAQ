@@ -1,0 +1,85 @@
+name: Atualiza dados ANTAQ
+
+on:
+  schedule:
+    # ANTAQ publica entre dia 25-30 do mês posterior.
+    # Rodamos dia 1, 5 e 10 às 06h UTC (03h Brasília) — workflow é
+    # idempotente, só commita se algo mudou.
+    - cron: '0 6 1,5,10 * *'
+  workflow_dispatch:   # botão "Run workflow" no GitHub
+
+permissions:
+  contents: write       # precisa para commit dos JSONs
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependências
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Baixar ZIPs ANTAQ
+        run: python download_antaq.py
+
+      - name: Consolidar para Parquet
+        run: python consolidar_antaq.py
+
+      - name: Exportar JSONs do dashboard
+        run: python -m analises.exportar_json
+
+      - name: Validar JSONs
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+          d = Path('data/dashboard')
+          esperados = ['meta', 'kpis', 'series_mensais', 'momentum',
+                       'stl', 'granel_liquido', 'rotas', 'portos', 'forecast']
+          for nome in esperados:
+              path = d / f'{nome}.json'
+              assert path.exists(), f'Arquivo faltando: {path}'
+              data = json.load(open(path, encoding='utf-8'))
+              assert data, f'JSON vazio: {path}'
+          print('✓ Todos os 9 JSONs presentes e não-vazios.')
+          "
+
+      - name: Configurar git
+        run: |
+          git config user.name "antaq-bot"
+          git config user.email "bot@antaq.local"
+
+      - name: Commit dos JSONs (apenas se houver mudança)
+        run: |
+          git add data/dashboard/*.json
+          if git diff --staged --quiet; then
+            echo "Sem mudanças nos JSONs — nada a commitar."
+          else
+            ULT=$(python -c "import json; print(json.load(open('data/dashboard/meta.json'))['ultimo_mes_dados'])")
+            git commit -m "data: atualiza dashboard para safra ${ULT}"
+            git push
+          fi
+
+      - name: Commit dos Parquet (opcional — comentar se ficar pesado)
+        run: |
+          git add parquet/
+          if git diff --staged --quiet; then
+            echo "Sem mudanças nos parquet."
+          else
+            git commit -m "data: atualiza parquet ANTAQ"
+            git push
+          fi
