@@ -267,6 +267,11 @@ def gerar_indicador(ind_id: str, out_dir: Path) -> dict:
                 doc[chave] = extras[chave]
     if extras.get("track_record"):
         doc["track_record"] = _saneia(extras["track_record"])
+    # Blocos de renderização estruturada (pirâmide invertida, achado #30)
+    for chave in ("o_que_e", "como_funciona", "por_que_bimestral",
+                  "detalhes_tecnicos", "limitacoes", "reprodutibilidade"):
+        if extras.get(chave) is not None:
+            doc[chave] = extras[chave]
 
     erros = validar_indicador(doc)
     if erros:

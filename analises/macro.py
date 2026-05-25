@@ -92,9 +92,30 @@ def selic_meta() -> pd.Series:
     return sgs(432).rename("selic_meta")
 
 
-def pim_pf() -> pd.Series:
-    """PIM-PF Indústria Geral dessazonalizada (SGS 28503)."""
-    return sgs(28503).rename("pim_pf")
+def pim_pf(force: bool = False) -> pd.Series:
+    """PIM-PF Indústria Geral dessazonalizada — fonte primária IBGE SIDRA.
+
+    Tabela 8888, variável 12607 (número-índice com ajuste sazonal, 2022=100),
+    classificação 544/129314 (Indústria Geral). Atualiza assim que o IBGE
+    publica, sem o lag de dias do BCB SGS 28503. Cache local em parquet.
+    """
+    arq = CACHE / "sidra_pimpf_8888_v12607.parquet"
+    if arq.exists() and not force:
+        return pd.read_parquet(arq).iloc[:, 0]
+    url = ("https://apisidra.ibge.gov.br/values/t/8888"
+           "/n1/all/v/12607/p/all/c544/129314")
+    raw = json.loads(urllib.request.urlopen(url, timeout=60).read())
+    if len(raw) < 2:
+        raise ValueError("SIDRA 8888/v12607: resposta vazia.")
+    df = pd.DataFrame(raw[1:])
+    df["mes"] = pd.to_datetime(df["D3C"], format="%Y%m")
+    df["valor"] = pd.to_numeric(df["V"], errors="coerce")
+    s = (df.dropna(subset=["valor"])
+            .set_index("mes")["valor"]
+            .sort_index()
+            .rename("pim_pf"))
+    s.to_frame().to_parquet(arq)
+    return s
 
 
 def atualizar_cache(codigos: list[int] | None = None) -> None:

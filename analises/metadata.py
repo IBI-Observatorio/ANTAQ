@@ -759,15 +759,11 @@ INDICADORES: dict[str, dict] = {
     },
     "30": {
         "titulo": "PIM-PF Combinado IBI — componente DFM em horizonte bimestral",
-        "subtitulo": (
-            "Modelo combinado AR(1) + fatores latentes da movimentação portuária "
-            "para previsão da produção industrial 2 meses à frente."
-        ),
+        "subtitulo": "Previsão da produção industrial brasileira com 2 meses de antecedência.",
         "slug": "portgdp",
         "cluster": "ineditas",
         "destaque": True,
         "categoria": "Inédita",
-        "badge": "Linha D · validado · re-test mai/2028",
         "granularidade": "bimestral",  # apenas h=2 publicado
         "modulo": "analises.c7_ineditas",
         "funcao": "a30_portgdp",
@@ -776,10 +772,8 @@ INDICADORES: dict[str, dict] = {
         "tags": [
             "pim-pf",
             "producao-industrial",
+            "previsao",
             "dfm",
-            "combinacao-granger-ramanathan",
-            "conformal",
-            "linha-d",
             "bimestral",
         ],
         "links_transparencia": {
